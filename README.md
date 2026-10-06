@@ -1,14 +1,14 @@
-# AI in Peer Review: the Good, the Bad and a Path Forward  -- Study Tracker
+# Artificial Intelligence for Peer Review - Study Tracker
 
-A continuously updated companion resource to **"AI for Peer Review: the Good, the Bad and a Path Forward"** (Islamaj, Comeau, Yeganova, Tian, Kim, Lemberger, Gashteovski & Lu).
+A continuously updated companion resource to **"Artificial Intelligence for Peer Review"** (Islamaj, Comeau, Yeganova, Tian, Kim, Lemberger, Gashteovski & Lu).
 
-This repository hosts a GitHub Pages site tracking empirical studies, pilots, and audits on AI use in scientific peer review. It extends Table 2 from the manuscript and is updated periodically by the authors as new relevant work is published, so the evidence base stays current beyond the publication date of the paper.
+This repository hosts a GitHub Pages site tracking empirical studies, pilots, and audits on AI use in scientific peer review. It extends Table 1 and Table 2 from the manuscript and is updated periodically by the authors as new relevant work is published, so the evidence base stays current beyond the publication date of the paper.
 
 **Live page:** `https://NLM-DIR/github.io/AI-Peer-Review-tracker` 
 
 **Maintenance:** This page is maintained solely by the authors of the accompanying manuscript. It is not open to public edits, pull requests, or external contributions. 
 
-To suggest a study for inclusion, open an issue or pull request against this repository following the format in <code>studies-data.js</code>. This page is a research resource.
+To suggest a study for inclusion, you can summarize the data following the Table 2 structure below and email the authors. This page is a research resource.
 
 ---
 
@@ -16,7 +16,7 @@ To suggest a study for inclusion, open an issue or pull request against this rep
 
 If you use this resource, please cite the accompanying paper:
 
-> Islamaj, R., Comeau, D.C., Yeganova, L., Tian, S., Kim, W., Lemberger, T., Gashteovski, K., & Lu, Z. *AI for Peer Review: the Good, the Bad and a Path Forward.* [Nature Computational Science, 2026]
+> Islamaj, R., Comeau, D.C., Yeganova, L., Tian, S., Kim, W., Lemberger, T., Gashteovski, K., & Lu, Z. *Artificial Intelligence for Peer Review.* [Nature Computational Science, 2026]
 
 ---
 
@@ -24,16 +24,12 @@ If you use this resource, please cite the accompanying paper:
 
 ```
 .
-├── index.html    # The live tracker page (self-contained: HTML + CSS + JS)
+├── index.html    # The AI/human peer review empirical review studies tracker page (Table 2)
+├── policies.html # The publisher policies tracker page (Table 1)
 └── README.md     # This file
-```
-
-`index.html` has no build step and no external dependencies beyond what's inlined in the file. It can be edited directly by an author and will update the live site as soon as it's pushed to the branch GitHub Pages is serving from.
-
----
 
 
-## Table structure
+## Table 2 structure
 
 Each entry looks like this:
 
