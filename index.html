@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI in Peer Review: the Good, the Bad and a Path Forward  -- Study Tracker</title>
+<title>Artificial Intelligence for Peer Review - Study Tracker</title>
 <style>
   :root {
     --bg: #fafafa;
@@ -47,7 +47,37 @@
     max-width: 760px;
     font-size: 0.98rem;
   }
+ nav.site-nav {
+    max-width: 1100px;
+    margin: 1rem auto 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  nav.site-nav a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+  }
+  nav.site-nav a.active {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.55);
+  }
+  nav.site-nav a:hover { background: rgba(255,255,255,0.12); }
   .meta-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+   .meta-bar {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0.9rem 1.5rem;
@@ -188,9 +218,13 @@
 
 <header>
   <div class="inner">
-    <h1>AI in Peer Review: the Good, the Bad and a Path Forward  -- Study Tracker</h1>
-    <p>Companion to <em>"AI for Peer Review: the Good, the Bad and a Path Forward"</em> (Islamaj, Comeau, Yeganova, Tian, Kim, Lemberger, Gashteovski &amp; Lu). This page tracks empirical qualitative studies on AI use in scientific peer review, mapped where relevant to the three-tier AI-in-Peer-Review adoption framework.</p>
+    <h1>Artificial Intelligence for Peer Review - Study Tracker</h1>
+    <p>Companion to <em>"Artificial Intelligence for Peer Review "</em> (Islamaj, Comeau, Yeganova, Tian, Kim, Lemberger, Gashteovski &amp; Lu). This page tracks empirical qualitative studies on AI use in scientific peer review, mapped where relevant to the three-tier AI-in-Peer-Review adoption framework. This page is the extended Table 2</p>
   </div>
+   <nav class="site-nav">
+    <a href="index.html" class="active">Study Tracker</a>
+    <a href="policies.html">Publisher Policies</a>
+  </nav>
 </header>
 
 <div class="meta-bar">
@@ -203,7 +237,7 @@
   <div class="card">
     <h2>How this page works</h2>
     <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0;">
-      This table reproduces and extends Supplementary Table 1 from the manuscript. New studies are added periodically as they are published; see the repository <code>README.md</code> for how to propose an addition. Tier tags reflect where each study's findings contribute in the three-tier framework (Tier 1: automated verification, Tier 2: supervised assistance, Tier 3: human-led judgment). Many studies findings cover more than one tier. Positive findings are marked in green, and negative findings are marked in red.
+      This table extends Table 2 from the manuscript. New studies are added periodically as they are published; see the repository <code>README.md</code> for how to propose an addition. Tier tags reflect where each study's findings contribute in the three-tier framework (Tier 1: automated verification, Tier 2: supervised assistance, Tier 3: human-led judgment). Many studies findings cover more than one tier. Positive findings are marked in green, and negative findings are marked in red.
     </p>
     <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0;">
       To suggest a study for inclusion, open an issue or pull request against this repository following the format in <code>studies-data.js</code>. This page is a research resource.
@@ -241,7 +275,7 @@
 </main>
 
 <footer>
-  <p>Please refer to "AI for Peer Review: the Good, the Bad and a Path Forward." To suggest a study for inclusion, open an issue or pull request against this repository following the format in <code>studies-data.js</code>. This page is a research resource.</p>
+  <p>Please refer to "Artificial Intelligence for Peer Review" To suggest a study for inclusion, open an issue or pull request against this repository following the format in <code>studies-data.js</code>. This page is a research resource. Rezarta Islamaj.</p>
 </footer>
 
 <script>

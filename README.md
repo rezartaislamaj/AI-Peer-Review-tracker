@@ -2,9 +2,9 @@
 
 A continuously updated companion resource to **"AI for Peer Review: the Good, the Bad and a Path Forward"** (Islamaj, Comeau, Yeganova, Tian, Kim, Lemberger, Gashteovski & Lu).
 
-This repository hosts a GitHub Pages site tracking empirical studies, pilots, and audits on AI use in scientific peer review. It extends Supplementary Table 1 from the manuscript and is updated periodically by the authors as new relevant work is published, so the evidence base stays current beyond the publication date of the paper.
+This repository hosts a GitHub Pages site tracking empirical studies, pilots, and audits on AI use in scientific peer review. It extends Table 2 from the manuscript and is updated periodically by the authors as new relevant work is published, so the evidence base stays current beyond the publication date of the paper.
 
-**Live page:** `https://rezartadogan/github.io/AI-Peer-Review-tracker` 
+**Live page:** `https://NLM-DIR/github.io/AI-Peer-Review-tracker` 
 
 **Maintenance:** This page is maintained solely by the authors of the accompanying manuscript. It is not open to public edits, pull requests, or external contributions. 
 

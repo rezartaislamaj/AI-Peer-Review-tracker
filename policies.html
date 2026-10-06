@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publisher Policies on AI in Peer Review -- Study Tracker</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5f6368;
+    --border: #e2e2e2;
+    --accent: #2c5f8a;
+    --tier1: #e8f4ea;
+    --tier1-text: #1e6b34;
+    --tier2: #fff4e0;
+    --tier2-text: #8a5a00;
+    --tier3: #fbe9e9;
+    --tier3-text: #a13030;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  header {
+    background: linear-gradient(135deg, #1f3b57, #2c5f8a);
+    color: white;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+  header .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  header h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  header p {
+    margin: 0.2rem 0;
+    color: rgba(255,255,255,0.85);
+    max-width: 760px;
+    font-size: 0.98rem;
+  }
+  nav.site-nav {
+    max-width: 1100px;
+    margin: 1rem auto 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  nav.site-nav a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+  }
+  nav.site-nav a.active {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.55);
+  }
+  nav.site-nav a:hover { background: rgba(255,255,255,0.12); }
+  .meta-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .meta-bar strong { color: var(--text); }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .card h2 {
+    margin-top: 0;
+    font-size: 1.15rem;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.4rem;
+    margin-top: 0.8rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .legend span { white-space: nowrap; }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+  .controls input[type="text"] {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .tier-filter {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .tier-btn {
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 0.82rem;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .tier-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  thead th {
+    text-align: left;
+    padding: 0.6rem 0.7rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th:hover { color: var(--accent); }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:hover { background: #f7f9fb; }
+  td { padding: 0.7rem; }
+  .pub-name { font-weight: 600; white-space: nowrap; }
+  .pub-name a { color: var(--accent); text-decoration: none; }
+  .pub-name a:hover { text-decoration: underline; }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge.restrictive { background: var(--tier3); color: var(--tier3-text); }
+  .badge.moderate { background: var(--tier2); color: var(--tier2-text); }
+  .badge.permissive { background: var(--tier1); color: var(--tier1-text); }
+  .dots { letter-spacing: 1px; margin-right: 0.35rem; }
+  .date { white-space: nowrap; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .no-results {
+    text-align: center;
+    color: var(--muted);
+    padding: 2rem;
+  }
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  footer a { color: var(--accent); }
+  .count-line {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <h1>Publisher &amp; Venue Policies on AI in Peer Review</h1>
+    <p>Companion to <em>"Artificial Intelligence for Peer Review"</em> (Islamaj, Comeau, Yeganova, Tian, Kim, Lemberger, Gashteovski &amp; Lu). Table 1: guidance from major publishers and venues on generative AI use in peer review. Links and policies change frequently; each row shows the date it was last verified.</p>
+  </div>
+  <nav class="site-nav">
+    <a href="index.html">Study Tracker</a>
+    <a href="policies.html" class="active">Publisher Policies</a>
+  </nav>
+</header>
+
+<div class="meta-bar">
+  <span><strong>Last verified:</strong> <span id="last-updated"></span></span>
+  <span><strong>Policies tracked:</strong> <span id="policy-count-header"></span></span>
+  <span><strong>Source paper:</strong> see repository README for citation</span>
+</div>
+
+<main>
+  <div class="card">
+    <h2>How this page works</h2>
+    <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.4rem;">
+      This table is the maintained version of Table 1 in the manuscript. All publishers listed prohibit uploading manuscript content to external AI tools; the table summarizes what distinguishes each policy. <strong>Strictness</strong> combines permitted scope (none &rarr; language only &rarr; summarization/drafting) and disclosure burden (none &rarr; report &rarr; editor and report). Because publisher pages are reorganized often, this page is maintained alongside the study tracker so links and policy summaries can be corrected as venues update their guidance.
+    </p>
+    <div class="legend">
+      <span><span class="dots">&#9679;&#9679;&#9679;</span><span class="badge restrictive">Restrictive</span> &nbsp;no assistive use permitted</span>
+      <span><span class="dots">&#9679;&#9679;&#9675;</span><span class="badge moderate">Moderate</span> &nbsp;limited assistive use with disclosure</span>
+      <span><span class="dots">&#9679;&#9675;&#9675;</span><span class="badge permissive">Permissive</span> &nbsp;assistive use, no disclosure required</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="controls">
+      <input type="text" id="search-box" placeholder="Search by publisher or policy text...">
+      <div class="tier-filter" id="tier-filter">
+        <button class="tier-btn active" data-strict="all">All</button>
+        <button class="tier-btn" data-strict="restrictive">Restrictive</button>
+        <button class="tier-btn" data-strict="moderate">Moderate</button>
+        <button class="tier-btn" data-strict="permissive">Permissive</button>
+      </div>
+    </div>
+    <div class="count-line" id="count-line"></div>
+    <div style="overflow-x:auto;">
+      <table id="policies-table">
+        <thead>
+          <tr>
+            <th data-key="publisher">Publisher</th>
+            <th data-key="permitted">Permitted assistive uses</th>
+            <th data-key="inhouse">In-house tools</th>
+            <th data-key="disclosure">Disclosure requirement</th>
+            <th data-key="strictRank">Strictness</th>
+            <th data-key="lastVerified">Last verified</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+      <div class="no-results" id="no-results" style="display:none;">No policies match your filters.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Please refer to "Artificial Intelligence for Peer Review". To suggest a correction or update, contact the authors. This page is a research resource. </p>
+</footer>
+
+<script>
+/* ============================================================
+   EDIT HERE TO MAINTAIN THE TABLE
+   - Update LAST_UPDATED when you revise anything below (YYYY-MM-DD).
+   - For each row set "lastVerified" to the date you confirmed the link/policy.
+   - "strictness" must be one of: "restrictive" | "moderate" | "permissive".
+   ============================================================ */
+const LAST_UPDATED = "2026-08-17";
+
+const POLICIES = [
+  {
+    publisher: "ACL Rolling Review",
+    url: "https://aclrollingreview.org/",
+    permitted: "Reviewer writes all content and argument; no generative first drafts (incl. meta-reviews); paraphrasing/language polishing permitted only via privacy-preserving tools.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "Manuscript and review report may not be uploaded to non-privacy-preserving tools; violations sanctioned (desk-rejection, cycle ban); authors may report suspected AI reviews.",
+    strictness: "restrictive",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "AIP Publishing",
+    url: "https://publishing.aip.org/resources/researchers/policies-and-ethics/ai-policy/",
+    permitted: "Summarization and citation validation via internal tool.",
+    inhouse: "Alchemist Review.",
+    disclosure: "Not specified; permitted assistive use.",
+    strictness: "permissive",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "Elsevier",
+    url: "https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals",
+    permitted: "AI must not assist in manuscript evaluation; critical assessment is human-only. Language editing of the reviewer's own report not explicitly prohibited.",
+    inhouse: "Evaluate Manuscript (editors); reviewer tools in development.",
+    disclosure: "Reviewer accountable for all content; no AI-specific disclosure.",
+    strictness: "restrictive",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "Frontiers",
+    url: "https://www.frontiersin.org/journals/artificial-intelligence/for-authors/author-guidelines",
+    permitted: "Summarization, drafting constructive feedback via internal tool only.",
+    inhouse: "AIRA (closed environment; summaries, quality checks).",
+    disclosure: "External AI use requires prior editorial approval and author disclosure.",
+    strictness: "moderate",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "ICMJE",
+    url: "https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-reviewers.html",
+    permitted: "Permitted if journal policy allows; may not replace independent scientific judgment; confidentiality must be preserved.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "Disclose to journal; verify input accuracy.",
+    strictness: "moderate",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "Nature Portfolio",
+    url: "https://www.nature.com/nature-portfolio/editorial-policies/ai",
+    permitted: "Risk-based framework. Assistive use permitted (e.g., language editing of the review text, reporting-guideline checks, bibliographic cross-checks); evaluative use allowed only with human oversight; manuscripts must not be uploaded to generative AI tools.",
+    inhouse: "Springer Nature exploring \u201Csafe AI tools\u201D for reviewers.",
+    disclosure: "Declare any AI use that supported evaluation of the manuscript's claims in the review report.",
+    strictness: "moderate",
+    lastVerified: "2026-09-27"
+  },
+  {
+    publisher: "Oxford University Press",
+    url: "https://academic.oup.com/pages/for-authors/books/author-use-of-artificial-intelligence",
+    permitted: "Review-report grammar/readability edits only; no AI manuscript analysis or review generation.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "Journal-specific disclosure/attestation; human reviewer accountable.",
+    strictness: "moderate",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "PLOS",
+    url: "https://plos.org/research-integrity-and-ethics/",
+    permitted: "Language editing, translation, data assessment; must reflect the reviewer's own assessment.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "Must be disclosed to authors in review form or decision letter.",
+    strictness: "moderate",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "Sage",
+    url: "https://www.sagepub.com/journals/publication-ethics-policies/artificial-intelligence-policy",
+    permitted: "Language improvement for reviews.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "No disclosure required for purely assistive use.",
+    strictness: "permissive",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "Springer Nature",
+    url: "https://group.springernature.com/gp/group/ai/ai-guidance-for-researchers-editors-reviewers",
+    permitted: "Assistive use permitted; evaluative use only with human oversight and disclosure; unsecured/public upload prohibited.",
+    inhouse: "Exploring \u201Csafe AI tools\u201D for reviewers.",
+    disclosure: "Must declare any AI use in the review report.",
+    strictness: "moderate",
+    lastVerified: "2026-10-05"
+  },
+  {
+    publisher: "Taylor & Francis",
+    url: "https://taylorandfrancis.com/our-policies/ai-policy/",
+    permitted: "Wording and clarity improvement only; reviewer retains full responsibility.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "Reviewer responsibility and integrity expected.",
+    strictness: "moderate",
+    lastVerified: "2026-08-17"
+  },
+  {
+    publisher: "Wiley",
+    url: "https://www.wiley.com/en-us/publish/article/ai-guidelines/",
+    permitted: "Language and clarity improvement only.",
+    inhouse: "Not identified in the current policy.",
+    disclosure: "Declare use to handling editor and in the report.",
+    strictness: "moderate",
+    lastVerified: "2026-08-17"
+  }
+];
+/* ===================== END EDIT REGION ===================== */
+
+const RANK = { restrictive: 3, moderate: 2, permissive: 1 };
+const DOTS = { restrictive: "\u25CF\u25CF\u25CF", moderate: "\u25CF\u25CF\u25CB", permissive: "\u25CF\u25CB\u25CB" };
+const LABEL = { restrictive: "Restrictive", moderate: "Moderate", permissive: "Permissive" };
+
+const policies = POLICIES.map(p => ({ ...p, strictRank: RANK[p.strictness] || 0 }));
+
+function fmtDate(s) {
+  const d = new Date(s + "T00:00:00");
+  return isNaN(d) ? s : d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+document.getElementById('last-updated').textContent = fmtDate(LAST_UPDATED);
+document.getElementById('policy-count-header').textContent = policies.length;
+
+function strictCell(s) {
+  return `<span class="dots" aria-hidden="true">${DOTS[s]}</span><span class="badge ${s}">${LABEL[s]}</span>`;
+}
+
+function renderTable(list) {
+  const tbody = document.getElementById('table-body');
+  const noResults = document.getElementById('no-results');
+  tbody.innerHTML = '';
+  noResults.style.display = list.length === 0 ? 'block' : 'none';
+
+  list.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="pub-name"><a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.publisher)} &#8599;</a></td>
+      <td>${esc(p.permitted)}</td>
+      <td>${esc(p.inhouse)}</td>
+      <td>${esc(p.disclosure)}</td>
+      <td>${strictCell(p.strictness)}</td>
+      <td class="date">${fmtDate(p.lastVerified)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('count-line').textContent = `Showing ${list.length} of ${policies.length} policies`;
+}
+
+function applyFilters() {
+  const query = document.getElementById('search-box').value.toLowerCase();
+  const activeStrict = document.querySelector('.tier-btn.active').dataset.strict;
+
+  const filtered = policies.filter(p => {
+    const matchesStrict = activeStrict === 'all' || p.strictness === activeStrict;
+    const haystack = `${p.publisher} ${p.permitted} ${p.inhouse} ${p.disclosure}`.toLowerCase();
+    return matchesStrict && haystack.includes(query);
+  });
+
+  renderTable(filtered);
+}
+
+document.getElementById('search-box').addEventListener('input', applyFilters);
+
+document.querySelectorAll('.tier-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  });
+});
+
+let sortKey = null;
+let sortAsc = true;
+document.querySelectorAll('th[data-key]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (sortKey === key) { sortAsc = !sortAsc; } else { sortKey = key; sortAsc = true; }
+    const sorted = [...policies].sort((a, b) => {
+      let av = a[key], bv = b[key];
+      if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+      if (av < bv) return sortAsc ? -1 : 1;
+      if (av > bv) return sortAsc ? 1 : -1;
+      return 0;
+    });
+    renderTable(sorted);
+  });
+});
+
+renderTable(policies);
+</script>
+
+</body>
+</html>
